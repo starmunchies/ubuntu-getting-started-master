@@ -7,7 +7,9 @@ module.exports = async (req, res) => {
         name: req.body.name,
         completed: false,
     };
-
+    if(!process.env.READ)
+    {
     await db.storeItem(item);
+    }
     res.send(item);
 };

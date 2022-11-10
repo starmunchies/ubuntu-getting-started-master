@@ -1,16 +1,59 @@
+
 function App() {
     const { Container, Row, Col } = ReactBootstrap;
     return (
         <Container>
+            <Row><Navigate /></Row>
+            
             <Row>
                 <Col md={{ offset: 3, span: 6 }}>
                     <TodoListCard />
                 </Col>
             </Row>
+
         </Container>
     );
 }
 
+function Navigate() {
+
+    const styles = ` ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+
+        li {
+        float: center;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+
+        li a:hover {
+        background-color: #111;
+        }`;
+
+    return (
+        <div>
+            <style>{styles}</style>
+            <ul>
+                <li><a class="active" href="#home">Home</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    );
+
+}
 function TodoListCard() {
     const [items, setItems] = React.useState(null);
 
@@ -108,6 +151,7 @@ function AddItemForm({ onNewItem }) {
                     >
                         {submitting ? 'Adding...' : 'Add Item'}
                     </Button>
+                    
                 </InputGroup.Append>
             </InputGroup>
         </Form>
@@ -136,6 +180,8 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
         );
     };
 
+
+
     return (
         <Container fluid className={`item ${item.completed && 'completed'}`}>
             <Row>
@@ -152,14 +198,16 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
                         }
                     >
                         <i
-                            className={`far ${
-                                item.completed ? 'fa-check-square' : 'fa-square'
-                            }`}
+                            className={`far ${item.completed ? 'fa-check-square' : 'fa-square'
+                                }`}
                         />
                     </Button>
                 </Col>
                 <Col xs={10} className="name">
                     {item.name}
+                </Col>
+                <Col xs={10} className="id">
+                    <p>id:</p>{item.id}
                 </Col>
                 <Col xs={1} className="text-center remove">
                     <Button
@@ -172,6 +220,7 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
                     </Button>
                 </Col>
             </Row>
+           
         </Container>
     );
 }
